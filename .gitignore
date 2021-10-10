@@ -1,7 +1,8 @@
 // Exclude the following from source control:
 
 node-modules/
-
+package-lock.json
+dist/readme.md
 
 
 

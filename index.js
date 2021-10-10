@@ -1,55 +1,71 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-/*
-Rqmnts:		
-    app purpose		
-    how to use		
-    how to install		
-    how to report issues		
-    how to make contributions		
-Include video tutorial		
-include gitignore.
 
-ask Qs - figure out how inq works
-store in variables.
-write to filesystem - 
-*/
+const readmePathAndFilename = 'dist/README.md';
 
-inquirer
-  .prompt([
+// appData object for storing answers.
+let appData = {
+  /*
+    title: 'Project title here.',
+    description: 'Project description',
+    howToUse: ['step 1', 'step 2', 'step 3'],
+    imageLink: 'pathToImage',
+    videoLink: 'pathToVideo',
+    technologiesUsed: '['technology 1', 'technology 2', 'technology 3']',
+    problemsEncountered: '',
+    technicalDescription: ''
+  */
+};
+
+const getUserInput = () => {
+  inquirer.prompt([
     {
       type: 'input',
-      message: 'What is your user name?',
-      name: 'username',
-    },
-    {
-      type: 'password',
-      message: 'What is your password?',
-      name: 'password',
-    },
-    {
-      type: 'password',
-      message: 'Re-enter password to confirm:',
-      name: 'confirm',
-    },
+      message: 'What is the title of your project?',
+      name: 'title',
+    }
   ])
-  .then((response) =>
-    response.confirm === response.password
-      ? console.log('Success!')
-      : console.log('You forgot your password already?!', response.name, response.password, response.confirm)
-  );
-
-const writeReadme = () => {
-  fs.writeFile('dist/README.md', 'hellow', (err) =>
-  err ? console.error(err) : console.log('Success!')
-  );
+  .then(({ title }) => {
+    appData.title = title;
+    processInputs();
+  });
 }
 
 
+const processInputs = () => {
+  processTitle();
+};
+
+
+const processTitle = () => {
+  const titleText = `# ${appData.title}`;
+  appendToFile(titleText);
+};
+
+const appendToFile = (value) => {
+  fs.appendFile(readmePathAndFilename, value, (err) =>
+    err ? console.error(err) : console.log('readme.md created!')
+  );
+};
+
+const deleteReadme = () => {
+  try {
+    fs.unlinkSync(readmePathAndFilename)
+  } catch(err) { console.error(err) }
+};
+
+const start = () => {
+  deleteReadme();
+  getUserInput();
+}
+start();
 
 
 
-
-
+// const writeReadme = () => {
+//   fs.writeFile('dist/README.md', 'hellow', (err) =>
+//     err ? console.error(err) : console.log('Success!')
+//   );
+// }
 
 
