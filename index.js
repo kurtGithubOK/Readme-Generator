@@ -1,7 +1,6 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-const readmePathAndFilename = 'dist/README.md';
 // Constants for generated readme.md path and filename.
 const readmeDirectory = './dist';
 const readmeFilename = 'README.md';
@@ -22,8 +21,8 @@ let appData = {
   readmeSections: []
 };
 
-const getUserInput = () => {
-  inquirer.prompt([
+const promptForInput = () => {
+  return inquirer.prompt([
     {
       type: 'input',
       message: 'What is the title of your project?',
@@ -45,6 +44,79 @@ const getUserInput = () => {
       appData.description = description;
     });
 }
+
+
+const start = () => {
+  promptForInput()
+    .then()
+    .catch((err) => console.error('An error occured when generating the README.md file:', err));
+}
+start();
+
+
+
+const generateReadme = () =>
+`
+# Coding-Quiz
+
+# This is the submission for Coding Quiz homework [Coding Quiz](https://uwa.bootcampcontent.com/UWA-Bootcamp/uw-blv-virt-fsf-pt-07-2021-u-c/-/tree/master/04-Web-APIs/02-Homework) for U/W Coding Bootcamp Full Stack Flex Program, for Kurt Heimerman.<br/><br/>
+
+# ![video description](./readmeImages/videofile.xxx)
+Usage[link text](#abcd)
+# Table of Contents
+    * Installation 
+    * Usage  [link text](#abcd)
+    * License
+    * Contributing
+    * Tests
+    * Reporting Issues
+    * Questions?
+
+## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+
+
+## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf  
+## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+
+
+## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+
+
+## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf  
+## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+
+
+## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf  <a id="abcd"></a>
+## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+`;
+
 
 
 
@@ -79,51 +151,17 @@ const getUserInput = () => {
 //   } catch (err) { console.error(err) }
 // };
 
-// https://www.titanwolf.org/Network/q/de3adffe-b816-4f95-93f3-ef1534b80fe5/y
-var deleteFolderRecursive = function (path) {
-  if (fs.existsSync(path)) {
-    fs.readdirSync(path).forEach(function (file) {
-      var curPath = path + "/" + file;
-      if (fs.lstatSync(curPath).isDirectory()) { // recurse
-        deleteFolderRecursive(curPath);
-      } else { // delete file
-        fs.unlinkSync(curPath);
-      }
-    });
-    fs.rmdirSync(path);
-  }
-};
-
-
-const start = () => {
-  deleteFolderRecursive(readmeDirectory);
-  getUserInput();
-  processInputs();
-  // writeReadme();
-}
-start();
-
-
-
-const generateReadme = ({ name, location, github, linkedin }) =>
-`
-# Weather Dashboard
-
-# This is the submission for Coding Quiz homework [Weather Dashboard](https://uwa.bootcampcontent.com/UWA-Bootcamp/uw-blv-virt-fsf-pt-07-2021-u-c/-/tree/master/06-Server-Side-APIs/02-Homework) for U/W Coding Bootcamp Full Stack Flex Program, for Kurt Heimerman.<br/><br/>
-
-## A few notes about this app:      
-* When the app starts it defaults to the city of 'Seattle'.
-* The app first makes an API call to openweathermap.org to get the city's latitude & longitude.
-* It then makes a subsequent API call to get the current and forecast conditions.
-* A user can enter a city name, click 'Search', and be presented with that city's weather info.
-* The app saves weather info for cities in local storage.
-* The app is responsive.
-
-![Screenshot of Password Generator](./readmeImages/screenshot.png)
-
-## The deployed app is here:  https://kurtgithubok.github.io/Weather_Dashboard/
-
-## It uses HTML, CSS, Web-API fetch, and Javascript.
-
-## The most challenging part of this exercise was accounting for structuring methods without resorting to deep nesting of API calls.
-`;
+// This code is from: https://www.titanwolf.org/Network/q/de3adffe-b816-4f95-93f3-ef1534b80fe5/y
+// var deleteFolderRecursive = function (path) {
+//   if (fs.existsSync(path)) {
+//     fs.readdirSync(path).forEach(function (file) {
+//       var curPath = path + "/" + file;
+//       if (fs.lstatSync(curPath).isDirectory()) { // recurse
+//         deleteFolderRecursive(curPath);
+//       } else { // delete file
+//         fs.unlinkSync(curPath);
+//       }
+//     });
+//     fs.rmdirSync(path);
+//   }
+// };
