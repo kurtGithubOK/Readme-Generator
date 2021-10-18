@@ -2,8 +2,7 @@ const inquirer = require('inquirer');
 const fs = require('fs');
 
 // Constants for generated readme.md path and filename.
-const readmeDirectory = './dist';
-const readmeFilename = 'README.md';
+const readmePathAndFilename = './dist/README.md';
 
 // appData object for storing answers.
 let appData = {
@@ -17,8 +16,6 @@ let appData = {
     problemsEncountered: '',
     technicalDescription: ''
   */
-  // Array of readme sections to be iterated over for appending to readme.md file.
-  readmeSections: []
 };
 
 const promptForInput = () => {
@@ -39,27 +36,29 @@ const promptForInput = () => {
       name: 'howToUse',
     }
   ])
-    .then(({ title, description }) => {
-      appData.title = title;
-      appData.description = description;
-    });
-}
+};
 
 
 const start = () => {
   promptForInput()
-    .then()
+    .then( (responses) => {
+      makeReadme(responses);
+      console.log('README.md successfully created');
+    })
     .catch((err) => console.error('An error occured when generating the README.md file:', err));
 }
 start();
 
+const makeReadme = (responses) => {
+  const readmeContent = generateReadme(responses);
+  fs.writeFileSync(readmePathAndFilename, readmeContent);
+};
 
-
-const generateReadme = () =>
+const generateReadme = ( {title, description} ) =>
 `
-# Coding-Quiz
+# ${title}
 
-# This is the submission for Coding Quiz homework [Coding Quiz](https://uwa.bootcampcontent.com/UWA-Bootcamp/uw-blv-virt-fsf-pt-07-2021-u-c/-/tree/master/04-Web-APIs/02-Homework) for U/W Coding Bootcamp Full Stack Flex Program, for Kurt Heimerman.<br/><br/>
+# Description: ${description}
 
 # ![video description](./readmeImages/videofile.xxx)
 Usage[link text](#abcd)
