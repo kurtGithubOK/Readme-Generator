@@ -4,20 +4,17 @@ const fs = require('fs');
 // Constants for generated readme.md path and filename.
 const readmePathAndFilename = './dist/README.md';
 
-// appData object for storing answers.
-let appData = {
-  /*
-    title: 'Project title here.',
-    description: 'Project description',
-    howToUse: ['step 1', 'step 2', 'step 3'],
-    imageLink: 'pathToImage',
-    videoLink: 'pathToVideo',
-    technologiesUsed: '['technology 1', 'technology 2', 'technology 3']',
-    problemsEncountered: '',
-    technicalDescription: ''
-  */
-};
+// start() starts the app.  Called from end of this file.
+const start = () => {
+  promptForInput()
+    .then( (responses) => {
+      makeReadme(responses);
+      console.log('README.md successfully created');
+    })
+    .catch((err) => console.error('An error occured when generating the README.md file:', err));
+}
 
+// Prompts user for input used to generate README.md file.
 const promptForInput = () => {
   return inquirer.prompt([
     {
@@ -32,36 +29,29 @@ const promptForInput = () => {
     },
     {
       type: 'input',
-      message: 'Describe how to use this project.',
-      name: 'howToUse',
+      message: 'Describe how to install this project.',
+      name: 'installation',
     }
   ])
 };
 
-
-const start = () => {
-  promptForInput()
-    .then( (responses) => {
-      makeReadme(responses);
-      console.log('README.md successfully created');
-    })
-    .catch((err) => console.error('An error occured when generating the README.md file:', err));
-}
-start();
-
+// Generates README.md content and writes to file system.
 const makeReadme = (responses) => {
   const readmeContent = generateReadme(responses);
   fs.writeFileSync(readmePathAndFilename, readmeContent);
 };
 
-const generateReadme = ( {title, description} ) =>
+// generateReadme() uses template literals to parameterize an otherwise hardcoded README.md file.
+const generateReadme = ( {title, description, installation} ) =>
 `
 # ${title}
 
 # Description: ${description}
 
 # ![video description](./readmeImages/videofile.xxx)
-Usage[link text](#abcd)
+
+[link text](#abcd)
+
 # Table of Contents
     * Installation 
     * Usage  [link text](#abcd)
@@ -71,7 +61,7 @@ Usage[link text](#abcd)
     * Reporting Issues
     * Questions?
 
-## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Installation - ${installation} 
 ## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
 ## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
 ## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
@@ -116,51 +106,4 @@ Usage[link text](#abcd)
 ## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
 `;
 
-
-
-
-// // Wraps calls to functions that process each user input.
-// const processInputs = () => {
-//   const processedTitle = processTitle();
-//   appData.readmeSections.push(processedTitle);
-
-//   const processedDescription = processDescription();
-//   appData.readmeSections.push(processedDescription);
-
-//   // Now that .................
-// };
-
-// const processTitle = () => {
-//   return `# ${appData.title} \n`;
-// };
-
-// const processDescription = () => {
-//   return `## ${appData.description} \n`;
-// };
-
-// const appendToFile = (value) => {
-//   fs.appendFile(readmePathAndFilename, value, (err) =>
-//     err ? console.error(err) : console.log('readme.md created!')
-//   );
-// };
-
-// const deleteReadme = () => {
-//   try {
-//     fs.unlinkSync(readmeDirectory)
-//   } catch (err) { console.error(err) }
-// };
-
-// This code is from: https://www.titanwolf.org/Network/q/de3adffe-b816-4f95-93f3-ef1534b80fe5/y
-// var deleteFolderRecursive = function (path) {
-//   if (fs.existsSync(path)) {
-//     fs.readdirSync(path).forEach(function (file) {
-//       var curPath = path + "/" + file;
-//       if (fs.lstatSync(curPath).isDirectory()) { // recurse
-//         deleteFolderRecursive(curPath);
-//       } else { // delete file
-//         fs.unlinkSync(curPath);
-//       }
-//     });
-//     fs.rmdirSync(path);
-//   }
-// };
+start();
