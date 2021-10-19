@@ -1,15 +1,19 @@
+// Imports.
 const inquirer = require('inquirer');
 const fs = require('fs');
 
-// Constants for generated readme.md path and filename.
+// Constants.
 const readmePathAndFilename = './dist/README.md';
+const LICENSE_BSD = 'BSD';
+const LICENSE_MIT = 'MIT';
+const LICENSE_GPL = 'GPL';
 
 // start() starts the app.  Called from end of this file.
 const start = () => {
   promptForInput()
     .then( (responses) => {
       makeReadme(responses);
-      console.log('README.md successfully created');
+      console.log('dist/README.md successfully created');
     })
     .catch((err) => console.error('An error occured when generating the README.md file:', err));
 }
@@ -29,9 +33,15 @@ const promptForInput = () => {
     },
     {
       type: 'input',
-      message: 'Describe how to install this project.',
+      message: 'Describe how to install this project:',
       name: 'installation',
-    }
+    },
+    {
+      type: 'list',
+      name: 'licenseType',
+      message: 'Which type of license?',
+      choices: [LICENSE_BSD, LICENSE_GPL, LICENSE_MIT]
+  }
   ])
 };
 
@@ -41,9 +51,21 @@ const makeReadme = (responses) => {
   fs.writeFileSync(readmePathAndFilename, readmeContent);
 };
 
+const getLicenseIconUrl = (licenseType) => {
+  if(licenseType === LICENSE_MIT) {
+    return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
+  } else if(licenseType === LICENSE_GPL) {
+    return '[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)';
+  } else {
+    return '[![License BSD-3](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)';
+  }
+};
+
 // generateReadme() uses template literals to parameterize an otherwise hardcoded README.md file.
-const generateReadme = ( {title, description, installation, usage, license, contributing, tests, issues, questions} ) => `
+const generateReadme = ( {title, description, installation, usage, licenseType, contributing, tests, issues, questions} ) => `
 # Project: ${title}
+
+# License: ${getLicenseIconUrl(licenseType)}
 
 # Description: ${description}
 
@@ -60,7 +82,7 @@ const generateReadme = ( {title, description, installation, usage, license, cont
 
 ## Usage<a id="usage"></a> - ${usage}
 
-## License<a id="license"></a> - ${license} 
+## License<a id="license"></a> - ${licenseType} 
 
 ## Contributing<a id="contributing"></a> - ${contributing}  
 
