@@ -42,68 +42,33 @@ const makeReadme = (responses) => {
 };
 
 // generateReadme() uses template literals to parameterize an otherwise hardcoded README.md file.
-const generateReadme = ( {title, description, installation} ) =>
-`
-# ${title}
+const generateReadme = ( {title, description, installation, usage, license, contributing, tests, issues, questions} ) => `
+# Project: ${title}
 
 # Description: ${description}
 
-# ![video description](./readmeImages/videofile.xxx)
+# Table of Contents:
+* [Installation](#installation) 
+* [Usage](#usage)
+* [License](#license)
+* [Contributing](#contributing)
+* [Tests](#tests)
+* [Reporting Issues](#issues)
+* [Questions?](#questions)
 
-[link text](#abcd)
+## Installation<a id="installation"></a> - ${installation} 
 
-# Table of Contents
-    * Installation 
-    * Usage  [link text](#abcd)
-    * License
-    * Contributing
-    * Tests
-    * Reporting Issues
-    * Questions?
+## Usage<a id="usage"></a> - ${usage}
 
-## Installation - ${installation} 
-## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## License<a id="license"></a> - ${license} 
 
+## Contributing<a id="contributing"></a> - ${contributing}  
 
-## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf  
-## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Tests<a id="tests"></a> - ${tests}
 
+## Reporting Issues<a id="issues"></a> - ${issues}
 
-## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-
-
-## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf  
-## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-
-
-## Installation - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Usage - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## License - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Contributing - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Tests - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf  <a id="abcd"></a>
-## Reporting Issues - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
-## Questions? - asdf adf adf asdf adf asdf adf asdf asdf asdf asdf asdf sdf 
+## Questions?<a id="questions"></a> - ${questions}
 `;
 
 start();
