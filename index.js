@@ -11,7 +11,7 @@ const LICENSE_GPL = 'GPL';
 // start() starts the app.  Called from end of this file.
 const start = () => {
   promptForInput()
-    .then( (responses) => {
+    .then((responses) => {
       makeReadme(responses);
       console.log('dist/README.md successfully created');
     })
@@ -37,11 +37,31 @@ const promptForInput = () => {
       name: 'installation',
     },
     {
+      type: 'input',
+      message: 'How is this app run?',
+      name: 'usage'
+    },
+    {
       type: 'list',
       name: 'licenseType',
       message: 'Which type of license?',
       choices: [LICENSE_BSD, LICENSE_GPL, LICENSE_MIT]
-  }
+    },
+    {
+      type: 'input',
+      message: 'What tests were performed on this app?',
+      name: 'tests'
+    },
+    {
+      type: 'input',
+      message: 'Enter your email address:',
+      name: 'email'
+    },
+    {
+      type: 'input',
+      message: 'Enter your github account name:',
+      name: 'github'
+    }
   ])
 };
 
@@ -52,9 +72,9 @@ const makeReadme = (responses) => {
 };
 
 const getLicenseIconUrl = (licenseType) => {
-  if(licenseType === LICENSE_MIT) {
+  if (licenseType === LICENSE_MIT) {
     return '[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)';
-  } else if(licenseType === LICENSE_GPL) {
+  } else if (licenseType === LICENSE_GPL) {
     return '[![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](http://www.gnu.org/licenses/gpl-3.0)';
   } else {
     return '[![License BSD-3](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)';
@@ -62,8 +82,8 @@ const getLicenseIconUrl = (licenseType) => {
 };
 
 // generateReadme() uses template literals to parameterize an otherwise hardcoded README.md file.
-const generateReadme = ( {title, description, installation, usage, licenseType, contributing, tests, issues, questions} ) => `
-# Project: ${title}
+const generateReadme = ({ title, description, installation, usage, licenseType, tests, email, github }) => `
+# Title: ${title}
 
 # License: ${getLicenseIconUrl(licenseType)}
 
@@ -82,15 +102,14 @@ const generateReadme = ( {title, description, installation, usage, licenseType, 
 
 ## Usage<a id="usage"></a> - ${usage}
 
-## License<a id="license"></a> - ${licenseType} 
-
-## Contributing<a id="contributing"></a> - ${contributing}  
-
 ## Tests<a id="tests"></a> - ${tests}
 
-## Reporting Issues<a id="issues"></a> - ${issues}
+## Contributing<a id="contributing"></a> - Contributions can be made via this github link:  https://github.com/${github}
 
-## Questions?<a id="questions"></a> - ${questions}
+## Reporting Issues<a id="issues"></a> - Issues can be reported via this github link:  https://github.com/${github}
+
+## Questions?<a id="questions"></a> - Questions can be emailed to the author:  email:${email}
 `;
 
+// Starts the app when 'node index.js' command is run from the command line.
 start();
