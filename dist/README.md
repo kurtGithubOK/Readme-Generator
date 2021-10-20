@@ -1,9 +1,9 @@
 
-# Project: 1111111111
+# Title: kurt's project
 
-# License: [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# License: [![License BSD-3](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 
-# Description: 22222222222
+# Description: the best project
 
 # Table of Contents:
 * [Installation](#installation) 
@@ -14,16 +14,14 @@
 * [Reporting Issues](#issues)
 * [Questions?](#questions)
 
-## Installation<a id="installation"></a> - 33333333333 
+## Installation<a id="installation"></a> - run npm i 
 
 ## Usage<a id="usage"></a> - undefined
 
-## License<a id="license"></a> - MIT 
+## Tests<a id="tests"></a> - manual tests
 
-## Contributing<a id="contributing"></a> - undefined  
+## Contributing<a id="contributing"></a> - Contributions can be made via this github link:  https://github.com/kurtGithubOK
 
-## Tests<a id="tests"></a> - undefined
+## Reporting Issues<a id="issues"></a> - Issues can be reported via this github link:  https://github.com/kurtGithubOK
 
-## Reporting Issues<a id="issues"></a> - undefined
-
-## Questions?<a id="questions"></a> - undefined
+## Questions?<a id="questions"></a> - Questions can be emailed to the author:  email:kurtheimerman@yahoo.com
